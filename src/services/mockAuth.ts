@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react'
 
 export type Profile = 'ESTUDANTE' | 'PROFESSOR' | 'INTERPRETE'
-export type DemoSession = { email: string; profile: Profile }
+export type DemoSession = { name: string; email: string; profile: Profile }
 export type RegistrationData = {
   name: string
   email: string
@@ -59,7 +59,7 @@ export function signIn(email: string, password: string): DemoSession | null {
   const normalizedEmail = email.trim().toLowerCase()
   const account = accounts.get(normalizedEmail)
   if (!account || password !== account.password) return null
-  session = { email: normalizedEmail, profile: account.profile }
+  session = { name: account.name, email: normalizedEmail, profile: account.profile }
   publish()
   return session
 }
