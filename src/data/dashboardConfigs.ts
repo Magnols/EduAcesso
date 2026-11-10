@@ -1,4 +1,4 @@
-import { BookA, BookOpen, CalendarDays, ChartColumn, ClipboardCheck, FileCheck2, GraduationCap, Hand, Home, Presentation, Settings, Sparkles, UserRound, UsersRound } from 'lucide-react'
+import { BookA, BookOpen, CalendarDays, ChartColumn, ClipboardCheck, FileCheck2, GraduationCap, Hand, Home, Layers3, Presentation, Settings, Sparkles, UserRound, UsersRound } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 export type DashboardConfig = {
@@ -15,6 +15,7 @@ export const studentDashboardConfig: DashboardConfig = {
   notification: 'Boas-vindas ao EduAcesso! Os materiais apresentados são prévias em preparação.',
   items: [
     { path: '/estudante', label: 'Início', icon: Home },
+    { path: '/estudante/modulos', label: 'Meus Módulos', icon: Layers3 },
     { path: '/estudante/materiais', label: 'Materiais', icon: BookOpen },
     { path: '/estudante/glossarios', label: 'Glossários', icon: BookA },
     { path: '/estudante/atividades', label: 'Atividades', icon: ClipboardCheck },

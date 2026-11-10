@@ -17,6 +17,10 @@ import { InterpreterDashboard } from './pages/interprete/InterpreterDashboard'
 import { InterpreterSectionPage } from './pages/interprete/InterpreterSectionPage'
 import { InterpreterResourcePreview } from './pages/interprete/InterpreterResourcePreview'
 import './styles/interpreter.css'
+import { ModulesList } from './pages/student/modules/ModulesList'
+import { ModuleOverview } from './pages/student/modules/ModuleOverview'
+import { ModuleLesson } from './pages/student/modules/ModuleLesson'
+import { ModuleActivity } from './pages/student/modules/ModuleActivity'
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
         <Route path="/cadastro" element={<Register />} />
         <Route path="/estudante" element={<ProtectedRoute profile="ESTUDANTE"><StudentLayout /></ProtectedRoute>}>
           <Route index element={<StudentDashboard />} />
+          <Route path="modulos" element={<ModulesList />} />
+          <Route path="modulos/:moduloId" element={<ModuleOverview />} />
+          <Route path="modulos/:moduloId/aulas/:aulaId" element={<ModuleLesson />} />
+          <Route path="modulos/:moduloId/atividades/:atividadeId" element={<ModuleActivity />} />
           <Route path="materiais" element={<StudentSectionPage section="materiais" />} />
           <Route path="materiais/:materialId" element={<StudentMaterialPreview />} />
           <Route path="glossarios" element={<StudentSectionPage section="glossarios" />} />
