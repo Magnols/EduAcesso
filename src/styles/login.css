@@ -225,6 +225,7 @@
 }
 .login-back svg { width: 28px; height: 28px; }
 .login-demo-note { font-size: 12px; color: #526579; text-align: center; margin-top: 14px; line-height: 1.4; }
+.registration-success { margin-top: 18px; padding: 14px 16px; border: 1px solid #9bd4cb; border-radius: 12px; background: #ecfaf6; color: #15584e; font-size: 15px; line-height: 1.5; }
 .demo-page { min-height: 100svh; background: #eff6fb; display: grid; place-items: center; padding: 28px; }
 .demo-card { width: min(100%, 620px); background: #fff; border-radius: 28px; padding: clamp(24px, 5vw, 48px); box-shadow: 0 10px 40px #0d477810; }
 .demo-card h1 { font-size: clamp(28px, 4vw, 38px); width: auto; line-height: 1.15; }

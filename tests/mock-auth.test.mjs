@@ -55,3 +55,50 @@ test('sessão demonstrativa, credenciais e proteção por perfil', () => {
     assert.equal(ProtectedRoute({ profile, children: 'protected' }).props.to, '/login')
   }
 })
+
+test('cadastro valida campos e não cria contas inválidas', () => {
+  const auth = loadTypeScript('../src/services/mockAuth.ts', {
+    react: { useSyncExternalStore: (_subscribe, getSnapshot) => getSnapshot() },
+  })
+  const valid = {
+    name: 'Pessoa Fictícia', email: 'validacao@teste.local', password: 'Teste@2026',
+    confirmPassword: 'Teste@2026', profile: 'ESTUDANTE',
+  }
+  const empty = auth.register({ name: '   ', email: '', password: '', confirmPassword: '', profile: '' })
+  assert.equal(empty.ok, false)
+  assert.deepEqual(Object.keys(empty.errors), ['name', 'email', 'password', 'confirmPassword', 'profile'])
+  for (const [field, value] of [
+    ['name', ' \t '], ['email', 'invalido'], ['password', 'curta'],
+    ['confirmPassword', 'diferente'], ['profile', ''], ['profile', '__proto__'],
+  ]) {
+    const result = auth.register({ ...valid, [field]: value })
+    assert.equal(result.ok, false)
+    assert.ok(result.errors[field])
+    assert.equal(auth.signIn(valid.email, valid.password), null)
+  }
+  const duplicate = auth.register({ ...valid, email: ' PROFESSOR@EDUACESSO.LOCAL ' })
+  assert.equal(duplicate.ok, false)
+  assert.match(duplicate.errors.email, /já está cadastrado/)
+  assert.equal(auth.signIn('professor@eduacesso.local', 'EduAcesso@2026').profile, 'PROFESSOR')
+})
+
+test('novas contas entram nos três perfis, impedem duplicação e não persistem', () => {
+  const mocks = { react: { useSyncExternalStore: (_subscribe, getSnapshot) => getSnapshot() } }
+  const auth = loadTypeScript('../src/services/mockAuth.ts', mocks)
+  for (const profile of ['ESTUDANTE', 'PROFESSOR', 'INTERPRETE']) {
+    const email = `${profile.toLowerCase()}@teste.local`
+    const data = { name: '  Pessoa   Fictícia  ', email: ` ${email.toUpperCase()} `, password: 'Ficticio@2026', confirmPassword: 'Ficticio@2026', profile }
+    assert.equal(auth.register(data).ok, true)
+    assert.equal(auth.useDemoSession(), null)
+    assert.equal(auth.register({ ...data, email }).ok, false)
+    assert.equal(auth.signIn(email, 'errada'), null)
+    const session = auth.signIn(email, data.password)
+    assert.equal(session.profile, profile)
+    assert.equal(session.email, email)
+    assert.equal('password' in session, false)
+    auth.signOut()
+    const reloaded = loadTypeScript('../src/services/mockAuth.ts', mocks)
+    assert.equal(reloaded.signIn(email, data.password), null)
+    assert.equal(reloaded.signIn('estudante@eduacesso.local', 'EduAcesso@2026').profile, 'ESTUDANTE')
+  }
+})

@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Eye, EyeOff, LockKeyhole, LogIn, Mail } from 'lucide-react'
 import { profileInfo, signIn } from '../services/mockAuth'
 
 type FieldErrors = { email?: string; password?: string }
 export function LoginForm() {
   const navigate = useNavigate()
+  const location = useLocation()
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const [email, setEmail] = useState('')
@@ -41,6 +42,11 @@ export function LoginForm() {
     <section className="login-card" aria-labelledby="login-title">
       <h1 id="login-title">Bem-vindo de volta!</h1>
       <p className="login-subtitle">Entre com suas credenciais para continuar.</p>
+      {location.state?.registrationComplete === true && (
+        <p className="registration-success" role="status">
+          Conta demonstrativa criada com sucesso! Entre com seu e-mail e senha. O cadastro será perdido ao recarregar a página.
+        </p>
+      )}
       <form onSubmit={handleSubmit} noValidate>
         <div className="login-field">
           <label htmlFor="email"><Mail aria-hidden="true" />E-mail</label>
