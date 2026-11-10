@@ -1,0 +1,11 @@
+import { BookOpen, Cpu, UsersRound } from 'lucide-react'
+import { Header } from '../components/Header'
+import { Hero } from '../components/Hero'
+import { FeatureCard } from '../components/FeatureCard'
+import { HowItWorks } from '../components/HowItWorks'
+import { Footer } from '../components/Footer'
+import '../styles/home.css'
+
+export function Home() {
+  return <><a className="skip-link" href="#conteudo">Pular para o conteúdo</a><Header /><main id="conteudo"><Hero /><div className="container content-sections"><section className="features" id="recursos" aria-label="Recursos propostos para a plataforma"><FeatureCard title="Conteúdos acessíveis" description="Materiais em linguagem clara, com recursos visuais e apoio em Libras." icon={BookOpen} tone="teal" /><FeatureCard title="Inteligência artificial" description="Apoio na adaptação de textos, criação de glossários e atividades." icon={Cpu} tone="blue" /><FeatureCard title="Inclusão escolar" description="Conexão e colaboração entre estudantes, professores e intérpretes." icon={UsersRound} tone="green" /></section><HowItWorks /><section className="about" id="sobre" aria-labelledby="about-title"><div><p className="eyebrow">Tecnologia a serviço das pessoas</p><h2 id="about-title">Sobre o EduAcesso</h2></div><div><p>O EduAcesso é uma proposta de tecnologia educacional inclusiva desenvolvida para a Global Solution FIAP 2026, no desafio CitizenTech. Seu objetivo é apoiar a acessibilidade de conteúdos escolares para estudantes surdos, fortalecendo o trabalho de professores e intérpretes de Libras.</p><p className="proposal-note">Projeto em desenvolvimento. Os recursos apresentados descrevem a proposta da plataforma.</p></div></section><section className="information" aria-label="Informações do site"><div id="privacidade"><h2>Privacidade</h2><p>A política de privacidade está em preparação. Esta Home não oferece cadastro nem formulários para coleta de dados pessoais.</p></div><div id="acessibilidade"><h2>Acessibilidade</h2><p>Esta página oferece navegação por teclado, foco visível, textos alternativos e respeito à preferência por movimento reduzido. Os recursos educacionais de acessibilidade fazem parte da proposta em desenvolvimento.</p></div></section></div></main><Footer /></>
+}
