@@ -2,18 +2,21 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
-import { DemoDashboard } from './pages/DemoDashboard'
 import { Register } from './pages/Register'
 import { StudentLayout } from './layouts/StudentLayout'
 import { StudentDashboard } from './pages/student/StudentDashboard'
 import { StudentSectionPage } from './pages/student/StudentSectionPage'
 import { StudentMaterialPreview } from './pages/student/StudentMaterialPreview'
 import { DashboardLayout } from './layouts/DashboardLayout'
-import { professorDashboardConfig } from './data/dashboardConfigs'
+import { interpreterDashboardConfig, professorDashboardConfig } from './data/dashboardConfigs'
 import { ProfessorDashboard } from './pages/professor/ProfessorDashboard'
 import { ProfessorSectionPage } from './pages/professor/ProfessorSectionPage'
 import { ProfessorContentPreview } from './pages/professor/ProfessorContentPreview'
 import './styles/professor.css'
+import { InterpreterDashboard } from './pages/interprete/InterpreterDashboard'
+import { InterpreterSectionPage } from './pages/interprete/InterpreterSectionPage'
+import { InterpreterResourcePreview } from './pages/interprete/InterpreterResourcePreview'
+import './styles/interpreter.css'
 
 function App() {
   return (
@@ -42,7 +45,17 @@ function App() {
           <Route path="perfil" element={<ProfessorSectionPage section="perfil" />} />
           <Route path="configuracoes" element={<ProfessorSectionPage section="configuracoes" />} />
         </Route>
-        <Route path="/interprete" element={<ProtectedRoute profile="INTERPRETE"><DemoDashboard /></ProtectedRoute>} />
+        <Route path="/interprete" element={<ProtectedRoute profile="INTERPRETE"><DashboardLayout config={interpreterDashboardConfig} /></ProtectedRoute>}>
+          <Route index element={<InterpreterDashboard />} />
+          <Route path="materiais" element={<InterpreterSectionPage section="materiais" />} />
+          <Route path="materiais/:resourceId" element={<InterpreterResourcePreview />} />
+          <Route path="preparacao" element={<InterpreterSectionPage section="preparacao" />} />
+          <Route path="traducao" element={<InterpreterSectionPage section="traducao" />} />
+          <Route path="agenda" element={<InterpreterSectionPage section="agenda" />} />
+          <Route path="relatorios" element={<InterpreterSectionPage section="relatorios" />} />
+          <Route path="perfil" element={<InterpreterSectionPage section="perfil" />} />
+          <Route path="configuracoes" element={<InterpreterSectionPage section="configuracoes" />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )

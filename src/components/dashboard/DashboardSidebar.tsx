@@ -8,14 +8,14 @@ type DashboardSidebarProps = { config: DashboardConfig; mobile?: boolean; onNavi
 export function DashboardSidebar({ config, mobile = false, onNavigate }: DashboardSidebarProps) {
   const navigate = useNavigate()
   return (
-    <aside className={`student-sidebar${mobile ? ' mobile-sidebar' : ''}`} aria-label={`Menu do ${config.role}`}>
+    <aside className={`student-sidebar${mobile ? ' mobile-sidebar' : ''}`} aria-label={`Menu do ${config.label.toLocaleLowerCase()}`}>
       {mobile && <button className="sidebar-close student-icon-button" onClick={onNavigate} aria-label="Fechar menu"><X aria-hidden="true" /></button>}
       <div className="student-sidebar-brand">
-        <NavLink to={config.basePath} onClick={onNavigate} aria-label={`EduAcesso — início do ${config.role}`}><Brand /></NavLink>
+        <NavLink to={config.basePath} onClick={onNavigate} aria-label={`EduAcesso — início do ${config.label.toLocaleLowerCase()}`}><Brand /></NavLink>
         <p>Tecnologia que aproxima,<br />educação que inclui.</p>
         <span className="student-accent" aria-hidden="true" />
       </div>
-      <nav aria-label={`Navegação do ${config.role}`}>
+      <nav aria-label={`Navegação do ${config.label.toLocaleLowerCase()}`}>
         {config.items.map(({ path, label, icon: Icon }) => (
           <NavLink key={path} to={path} end={path === config.basePath} onClick={onNavigate} className={({ isActive }) => `student-nav-link${isActive ? ' active' : ''}`}><Icon aria-hidden="true" />{label}</NavLink>
         ))}
@@ -26,3 +26,4 @@ export function DashboardSidebar({ config, mobile = false, onNavigate }: Dashboa
     </aside>
   )
 }
+

@@ -33,8 +33,9 @@ export function DashboardLayout({ config }: { config: DashboardConfig }) {
         <DashboardHeader config={config} onOpenMenu={openMenu} menuOpen={menuOpen} />
         <main className="student-content" id={`${config.role}-content`} tabIndex={-1} ref={mainRef}><Outlet /></main>
       </div>
-      <dialog id={`${config.role}-mobile-menu`} className="student-mobile-dialog" ref={dialogRef} aria-label={`Menu do ${config.role}`} onClose={() => setMenuOpen(false)} onClick={event => { if (event.target === event.currentTarget) closeMenu() }}><DashboardSidebar config={config} mobile onNavigate={closeMenu} /></dialog>
+      <dialog id={`${config.role}-mobile-menu`} className="student-mobile-dialog" ref={dialogRef} aria-label={`Menu do ${config.label.toLocaleLowerCase()}`} onClose={() => setMenuOpen(false)} onClick={event => { if (event.target === event.currentTarget) closeMenu() }}><DashboardSidebar config={config} mobile onNavigate={closeMenu} /></dialog>
     </div>
   )
 }
+
 

@@ -47,10 +47,11 @@ test('sessão demonstrativa, credenciais e proteção por perfil', () => {
     assert.equal('password' in session, false)
     assert.equal(auth.profileInfo[profile].path, path)
     assert.equal(ProtectedRoute({ profile, children: 'protected' }), 'protected')
-    const otherProfile = profile === 'PROFESSOR' ? 'ESTUDANTE' : 'PROFESSOR'
-    const denied = ProtectedRoute({ profile: otherProfile, children: 'protected' })
-    assert.equal(denied.type, router.Navigate)
-    assert.equal(denied.props.to, path)
+    for (const otherProfile of ['ESTUDANTE', 'PROFESSOR', 'INTERPRETE'].filter(item => item !== profile)) {
+      const denied = ProtectedRoute({ profile: otherProfile, children: 'protected' })
+      assert.equal(denied.type, router.Navigate)
+      assert.equal(denied.props.to, path)
+    }
     auth.signOut()
     assert.equal(auth.useDemoSession(), null)
     assert.equal(ProtectedRoute({ profile, children: 'protected' }).props.to, '/login')

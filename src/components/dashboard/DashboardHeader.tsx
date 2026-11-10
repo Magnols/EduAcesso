@@ -42,7 +42,7 @@ export function DashboardHeader({ config, onOpenMenu, menuOpen }: { config: Dash
   const [read, setRead] = useState(false)
   return (
     <header className="student-header">
-      <div className="student-header-title"><button className="student-mobile-toggle student-icon-button" aria-label={`Abrir menu do ${config.role}`} aria-expanded={menuOpen} aria-haspopup="dialog" aria-controls={`${config.role}-mobile-menu`} onClick={onOpenMenu}><Menu aria-hidden="true" /></button><Icon aria-hidden="true" /><span>{config.title}</span></div>
+      <div className="student-header-title"><button className="student-mobile-toggle student-icon-button" aria-label={`Abrir menu do ${config.label.toLocaleLowerCase()}`} aria-expanded={menuOpen} aria-haspopup="dialog" aria-controls={`${config.role}-mobile-menu`} onClick={onOpenMenu}><Menu aria-hidden="true" /></button><Icon aria-hidden="true" /><span>{config.title}</span></div>
       <div className="student-header-actions">
         <HeaderDisclosure id={`${config.role}-notifications`} label={read ? 'Notificações: nenhuma nova' : 'Notificações: uma demonstrativa não lida'} trigger={<span className="notification-icon"><Bell aria-hidden="true" />{!read && <span className="notification-dot" />}</span>}>
           <h2>Notificações</h2>
@@ -59,5 +59,6 @@ export function DashboardHeader({ config, onOpenMenu, menuOpen }: { config: Dash
     </header>
   )
 }
+
 
 

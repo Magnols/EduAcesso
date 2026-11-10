@@ -1,8 +1,8 @@
-import { BookA, BookOpen, ChartColumn, ClipboardCheck, GraduationCap, Home, Presentation, Settings, Sparkles, UserRound, UsersRound } from 'lucide-react'
+import { BookA, BookOpen, CalendarDays, ChartColumn, ClipboardCheck, FileCheck2, GraduationCap, Hand, Home, Presentation, Settings, Sparkles, UserRound, UsersRound } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 export type DashboardConfig = {
-  role: 'estudante' | 'professor'
+  role: 'estudante' | 'professor' | 'interprete'
   label: string
   title: string
   basePath: string
@@ -34,5 +34,20 @@ export const professorDashboardConfig: DashboardConfig = {
     { path: '/professor/relatorios', label: 'Relatórios', icon: ChartColumn },
     { path: '/professor/perfil', label: 'Meu Perfil', icon: UserRound },
     { path: '/professor/configuracoes', label: 'Configurações', icon: Settings },
+  ],
+}
+
+export const interpreterDashboardConfig: DashboardConfig = {
+  role: 'interprete', label: 'Intérprete', title: 'Painel do Intérprete de Libras', basePath: '/interprete', icon: Hand,
+  notification: 'Demonstração: conheça os fluxos planejados de preparação linguística e revisão. Os recursos em destaque são exemplos; os conteúdos estão em preparação.',
+  items: [
+    { path: '/interprete', label: 'Início', icon: Home },
+    { path: '/interprete/materiais', label: 'Materiais de Apoio', icon: BookOpen },
+    { path: '/interprete/preparacao', label: 'Preparação Linguística', icon: Hand },
+    { path: '/interprete/traducao', label: 'Tradução e Revisão', icon: FileCheck2 },
+    { path: '/interprete/agenda', label: 'Agenda', icon: CalendarDays },
+    { path: '/interprete/relatorios', label: 'Relatórios', icon: ChartColumn },
+    { path: '/interprete/perfil', label: 'Meu Perfil', icon: UserRound },
+    { path: '/interprete/configuracoes', label: 'Configurações', icon: Settings },
   ],
 }
